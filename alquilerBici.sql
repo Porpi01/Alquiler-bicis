@@ -32,7 +32,7 @@ COLLATE = utf8mb4_unicode_ci;
 CREATE TABLE IF NOT EXISTS `alquilerBici`.`usuario` (
   `idusuario` INT NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
-  `bici_idbici` INT NOT NULL,
+  `bici_idbici` INT ,
   PRIMARY KEY (`idusuario`),
   INDEX `fk_usuario_bici1_idx` (`bici_idbici` ASC) VISIBLE,
   CONSTRAINT `fk_usuario_bici1`
@@ -48,3 +48,21 @@ COLLATE = utf8mb4_unicode_ci;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+INSERT INTO `alquilerBici`.`bici` (`idbici`, `disponibilidad`) VALUES ('1', '0');
+INSERT INTO `alquilerBici`.`bici` (`idbici`, `disponibilidad`) VALUES ('2', '0');
+INSERT INTO `alquilerBici`.`bici` (`idbici`, `disponibilidad`) VALUES ('3', '0');
+INSERT INTO `alquilerBici`.`bici` (`idbici`, `disponibilidad`) VALUES ('4', '0');
+INSERT INTO `alquilerBici`.`bici` (`idbici`, `disponibilidad`) VALUES ('5', '0');
+INSERT INTO `alquilerBici`.`bici` (`idbici`, `disponibilidad`) VALUES ('6', '0');
+
+
+INSERT INTO `alquilerBici`.`usuario` (`idusuario`, `nombre`) VALUES ('1', 'Alvaro');
+INSERT INTO `alquilerBici`.`usuario` (`idusuario`, `nombre`) VALUES ('2', 'Marcelo');
+INSERT INTO `alquilerBici`.`usuario` (`idusuario`, `nombre`) VALUES ('3', 'Moisés');
+INSERT INTO `alquilerBici`.`usuario` (`idusuario`, `nombre`) VALUES ('4', 'Alba');
+INSERT INTO `alquilerBici`.`usuario` (`idusuario`, `nombre`) VALUES ('5', 'Marta');
+INSERT INTO `alquilerBici`.`usuario` (`idusuario`, `nombre`) VALUES ('6', 'Maria');
+INSERT INTO `alquilerBici`.`usuario` (`idusuario`, `nombre`) VALUES ('7', 'Luis');
+

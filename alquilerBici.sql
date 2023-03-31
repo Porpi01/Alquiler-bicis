@@ -30,7 +30,7 @@ COLLATE = utf8mb4_unicode_ci;
 -- Table `alquilerBici`.`usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `alquilerBici`.`usuario` (
-  `idusuario` INT NOT NULL,
+  `idusuario` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
   `bici_idbici` INT ,
   PRIMARY KEY (`idusuario`),

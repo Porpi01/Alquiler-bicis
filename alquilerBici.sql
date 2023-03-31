@@ -18,7 +18,7 @@ USE `alquilerBici` ;
 -- Table `alquilerBici`.`bici`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `alquilerBici`.`bici` (
-  `idbici` INT NOT NULL AUTO_INCREMENT,
+  `idbici` INT NOT NULL,
   `disponibilidad` TINYINT NOT NULL,
   PRIMARY KEY (`idbici`))
 ENGINE = InnoDB
@@ -30,7 +30,7 @@ COLLATE = utf8mb4_unicode_ci;
 -- Table `alquilerBici`.`usuario`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `alquilerBici`.`usuario` (
-  `idusuario` INT NOT NULL AUTO_INCREMENT,
+  `idusuario` INT NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
   `bici_idbici` INT ,
   PRIMARY KEY (`idusuario`),

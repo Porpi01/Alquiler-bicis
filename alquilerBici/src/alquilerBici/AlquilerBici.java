@@ -12,8 +12,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.SwingConstants;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -73,18 +76,20 @@ public class AlquilerBici {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+	
+		
 		alquilerBici = new JFrame();
 		alquilerBici.setTitle("Alquilar Bici");
 		alquilerBici.getContentPane().setBackground(new Color(255, 235, 205));
-		alquilerBici.setBounds(100, 100, 743, 705);
+		alquilerBici.setBounds(100, 100, 644, 788);
 		alquilerBici.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		alquilerBici.getContentPane().setLayout(null);
 		
 		JLabel lbltitulo = new JLabel("Byke on the go");
 		lbltitulo.setForeground(new Color(153, 0, 51));
 		lbltitulo.setHorizontalAlignment(SwingConstants.CENTER);
-		lbltitulo.setFont(new Font("Broadway", Font.ITALIC, 30));
-		lbltitulo.setBounds(219, 24, 263, 87);
+		lbltitulo.setFont(new Font("Broadway", Font.ITALIC, 40));
+		lbltitulo.setBounds(131, 0, 365, 46);
 		alquilerBici.getContentPane().add(lbltitulo);
 		
 		
@@ -99,24 +104,24 @@ public class AlquilerBici {
 		tableBici.setBounds(10, 435, 226, -84);
 		alquilerBici.getContentPane().add(tableBici);
 		
-		JLabel lblcrearUsuario = new JLabel("Crear Usuario");
+		JLabel lblcrearUsuario = new JLabel("Crear Usuario:");
 		lblcrearUsuario.setFont(new Font("Arial", Font.BOLD, 12));
-		lblcrearUsuario.setBounds(363, 155, 153, 14);
+		lblcrearUsuario.setBounds(10, 322, 153, 14);
 		alquilerBici.getContentPane().add(lblcrearUsuario);
 		
 		JLabel lblnombreUsuario = new JLabel("Nombre");
 		lblnombreUsuario.setFont(new Font("Arial", Font.BOLD, 12));
-		lblnombreUsuario.setBounds(401, 190, 81, 14);
+		lblnombreUsuario.setBounds(50, 347, 81, 14);
 		alquilerBici.getContentPane().add(lblnombreUsuario);
 		
 		
-		JLabel lblidUsuario = new JLabel("idUsuario");
-		lblidUsuario.setFont(new Font("Arial", Font.BOLD, 12));
-		lblidUsuario.setBounds(401, 215, 115, 14);
-		alquilerBici.getContentPane().add(lblidUsuario);
+		JLabel lblidUsuarioCrear = new JLabel("idUsuario");
+		lblidUsuarioCrear.setFont(new Font("Arial", Font.BOLD, 12));
+		lblidUsuarioCrear.setBounds(50, 372, 115, 14);
+		alquilerBici.getContentPane().add(lblidUsuarioCrear);
 		
 		textFieldNombre = new JTextField();
-		textFieldNombre.setBounds(507, 184, 86, 20);
+		textFieldNombre.setBounds(141, 341, 86, 20);
 		alquilerBici.getContentPane().add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 		
@@ -135,58 +140,58 @@ public class AlquilerBici {
 		
 		JLabel lblAlquilarBici = new JLabel("Alquilar Bici");
 		lblAlquilarBici.setFont(new Font("Arial", Font.BOLD, 12));
-		lblAlquilarBici.setBounds(363, 348, 84, 14);
+		lblAlquilarBici.setBounds(343, 522, 84, 14);
 		alquilerBici.getContentPane().add(lblAlquilarBici);
 		
 		JLabel lblidBici = new JLabel("idBici");
 		lblidBici.setFont(new Font("Arial", Font.BOLD, 12));
-		lblidBici.setBounds(401, 382, 46, 14);
+		lblidBici.setBounds(379, 547, 46, 14);
 		alquilerBici.getContentPane().add(lblidBici);
 		
-		JLabel lblidUsuarioBici = new JLabel("idUsuario");
-		lblidUsuarioBici.setFont(new Font("Arial", Font.BOLD, 12));
-		lblidUsuarioBici.setBounds(401, 407, 88, 14);
-		alquilerBici.getContentPane().add(lblidUsuarioBici);
+		JLabel lbliduUsuarioAlquilar = new JLabel("idUsuario");
+		lbliduUsuarioAlquilar.setFont(new Font("Arial", Font.BOLD, 12));
+		lbliduUsuarioAlquilar.setBounds(379, 572, 88, 14);
+		alquilerBici.getContentPane().add(lbliduUsuarioAlquilar);
 		
 		JComboBox comboBoxidBici = new JComboBox();
-		comboBoxidBici.setBounds(507, 374, 86, 22);
+		comboBoxidBici.setBounds(483, 539, 86, 22);
 		alquilerBici.getContentPane().add(comboBoxidBici);
 		
 		JComboBox comboBoxidUsuarioBici = new JComboBox();
-		comboBoxidUsuarioBici.setBounds(507, 399, 86, 22);
+		comboBoxidUsuarioBici.setBounds(483, 564, 86, 22);
 		alquilerBici.getContentPane().add(comboBoxidUsuarioBici);
 		
 		
 		JLabel lblDevolverBici = new JLabel("Devolver Bici");
 		lblDevolverBici.setFont(new Font("Arial", Font.BOLD, 12));
-		lblDevolverBici.setBounds(363, 470, 153, 14);
+		lblDevolverBici.setBounds(343, 631, 153, 14);
 		alquilerBici.getContentPane().add(lblDevolverBici);
 		
 		JLabel lblidUsuarioDevolver = new JLabel("idUsuario");
 		lblidUsuarioDevolver.setFont(new Font("Arial", Font.BOLD, 12));
-		lblidUsuarioDevolver.setBounds(401, 503, 88, 14);
+		lblidUsuarioDevolver.setBounds(379, 656, 88, 14);
 		alquilerBici.getContentPane().add(lblidUsuarioDevolver);
 		
 		JComboBox comboBoxidBiciDevolver = new JComboBox();
-		comboBoxidBiciDevolver.setBounds(507, 495, 86, 22);
+		comboBoxidBiciDevolver.setBounds(483, 648, 86, 22);
 		alquilerBici.getContentPane().add(comboBoxidBiciDevolver);
 		
 		JScrollPane scrollPaneUsuario = new JScrollPane(tableUsuario);
-		scrollPaneUsuario.setBounds(10, 180, 281, 117);
+		scrollPaneUsuario.setBounds(10, 95, 281, 182);
 		alquilerBici.getContentPane().add(scrollPaneUsuario);
 		
 		JScrollPane scrollPaneBici = new JScrollPane(tableBici);
-		scrollPaneBici.setBounds(10, 337, 281, 117);
+		scrollPaneBici.setBounds(343, 95, 281, 182);
 		alquilerBici.getContentPane().add(scrollPaneBici);
 		
 		JLabel lblIdbicicrear = new JLabel("idBiciCrear");
 		lblIdbicicrear.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblIdbicicrear.setBounds(401, 299, 115, 14);
+		lblIdbicicrear.setBounds(379, 347, 81, 14);
 		alquilerBici.getContentPane().add(lblIdbicicrear);
 		
 		textFieldcrearBici = new JTextField();
 		textFieldcrearBici.setColumns(10);
-		textFieldcrearBici.setBounds(507, 293, 86, 20);
+		textFieldcrearBici.setBounds(483, 341, 86, 20);
 		alquilerBici.getContentPane().add(textFieldcrearBici);
 		
 		
@@ -234,7 +239,7 @@ public class AlquilerBici {
 		btnMostrarBici.setFont(new Font("Arial", Font.BOLD, 12));
 		
 		
-		btnMostrarBici.setBounds(74, 303, 153, 23);
+		btnMostrarBici.setBounds(407, 288, 153, 23);
 		alquilerBici.getContentPane().add(btnMostrarBici);
 		
 		
@@ -270,7 +275,7 @@ public class AlquilerBici {
 			}
 		});
 		btnmostrarUsuario.setFont(new Font("Arial", Font.BOLD, 12));
-		btnmostrarUsuario.setBounds(74, 146, 153, 23);
+		btnmostrarUsuario.setBounds(74, 288, 153, 23);
 		alquilerBici.getContentPane().add(btnmostrarUsuario);
 		
 		JButton btnSalir = new JButton("Salir");
@@ -281,15 +286,16 @@ public class AlquilerBici {
 		});
 		
 	
-		btnSalir.setBounds(628, 24, 89, 23);
+		btnSalir.setBounds(506, 11, 89, 23);
 		alquilerBici.getContentPane().add(btnSalir);
 		
 		textFieldUsuario = new JTextField();
 		textFieldUsuario.setColumns(10);
-		textFieldUsuario.setBounds(507, 209, 86, 20);
+		textFieldUsuario.setBounds(141, 366, 86, 20);
 		alquilerBici.getContentPane().add(textFieldUsuario);
 		
 		JButton btnCrearUsuario = new JButton("Crear Usuario");
+		btnCrearUsuario.setFont(new Font("Arial", Font.BOLD, 12));
 		btnCrearUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -335,10 +341,11 @@ public class AlquilerBici {
 				
 			}
 		});
-		btnCrearUsuario.setBounds(507, 144, 160, 23);
+		btnCrearUsuario.setBounds(74, 400, 153, 23);
 		alquilerBici.getContentPane().add(btnCrearUsuario);
 		
 		JButton btnAlquilar = new JButton("Alquilar");
+		btnAlquilar.setFont(new Font("Arial", Font.BOLD, 12));
 		btnAlquilar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 
@@ -420,10 +427,11 @@ public class AlquilerBici {
 				
 			}
 		});
-		btnAlquilar.setBounds(509, 337, 160, 23);
+		btnAlquilar.setBounds(400, 597, 160, 23);
 		alquilerBici.getContentPane().add(btnAlquilar);
 		
 		JButton btnDevolver = new JButton("Devolver");
+		btnDevolver.setFont(new Font("Arial", Font.BOLD, 12));
 		btnDevolver.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -431,15 +439,16 @@ public class AlquilerBici {
 				
 			}
 		});
-		btnDevolver.setBounds(507, 459, 160, 23);
+		btnDevolver.setBounds(400, 685, 160, 23);
 		alquilerBici.getContentPane().add(btnDevolver);
 		
-		JLabel lblCrearBici = new JLabel("Crear Bici");
+		JLabel lblCrearBici = new JLabel("Crear Bici:");
 		lblCrearBici.setFont(new Font("Dialog", Font.BOLD, 12));
-		lblCrearBici.setBounds(363, 262, 153, 14);
+		lblCrearBici.setBounds(343, 322, 153, 14);
 		alquilerBici.getContentPane().add(lblCrearBici);
 		
 		JButton btnCrearBici = new JButton("Crear Bici");
+		btnCrearBici.setFont(new Font("Arial", Font.BOLD, 12));
 		btnCrearBici.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -480,16 +489,59 @@ public class AlquilerBici {
 				
 			}
 		});
-		btnCrearBici.setBounds(507, 253, 160, 23);
+		btnCrearBici.setBounds(407, 400, 153, 23);
 		alquilerBici.getContentPane().add(btnCrearBici);
 		
-		JButton btnBorrar = new JButton("Borrar");
-		btnBorrar.setBounds(74, 461, 153, 23);
-		alquilerBici.getContentPane().add(btnBorrar);
+		JButton btnBorrarUsuario = new JButton("Borrar Usuario");
+		btnBorrarUsuario.setFont(new Font("Arial", Font.BOLD, 12));
+		btnBorrarUsuario.setBounds(74, 488, 153, 23);
+		alquilerBici.getContentPane().add(btnBorrarUsuario);
 		
-		JLabel lblelegirProducto = new JLabel("Elegir producto:");
-		lblelegirProducto.setBounds(31, 565, 160, 15);
-		alquilerBici.getContentPane().add(lblelegirProducto);
+		JLabel lblborrarUsuario = new JLabel("Borrar usuario:");
+		lblborrarUsuario.setFont(new Font("Arial", Font.BOLD, 12));
+		lblborrarUsuario.setBounds(10, 432, 106, 15);
+		alquilerBici.getContentPane().add(lblborrarUsuario);
+		
+		JComboBox comboBoxborrarUsuario = new JComboBox();
+		comboBoxborrarUsuario.setBounds(141, 455, 86, 22);
+		alquilerBici.getContentPane().add(comboBoxborrarUsuario);
+		
+	
+		JButton btnborrarBici = new JButton("Borrar Bici");
+		btnborrarBici.setFont(new Font("Arial", Font.BOLD, 12));
+		btnborrarBici.setBounds(407, 488, 153, 23);
+		alquilerBici.getContentPane().add(btnborrarBici);
+		
+
+		
+		JLabel lblElegirBici = new JLabel("Elegir bici:");
+		lblElegirBici.setFont(new Font("Arial", Font.BOLD, 12));
+		lblElegirBici.setBounds(379, 462, 106, 15);
+		alquilerBici.getContentPane().add(lblElegirBici);
+		
+		JComboBox comboBoxborrarBici = new JComboBox();
+		comboBoxborrarBici.setBounds(483, 455, 86, 22);
+		alquilerBici.getContentPane().add(comboBoxborrarBici);
+		
+		JLabel lblElegirUsuario = new JLabel("Elegir Usuario");
+		lblElegirUsuario.setFont(new Font("Arial", Font.BOLD, 12));
+		lblElegirUsuario.setBounds(50, 463, 90, 14);
+		alquilerBici.getContentPane().add(lblElegirUsuario);
+		
+		JLabel lblUsuario = new JLabel("USUARIO");
+		lblUsuario.setFont(new Font("Arial", Font.BOLD, 16));
+		lblUsuario.setBounds(110, 70, 81, 14);
+		alquilerBici.getContentPane().add(lblUsuario);
+		
+		JLabel lblBici = new JLabel("BICICLETA");
+		lblBici.setFont(new Font("Arial", Font.BOLD, 16));
+		lblBici.setBounds(437, 70, 93, 14);
+		alquilerBici.getContentPane().add(lblBici);
+		
+		JLabel lblBorrarBici = new JLabel("Borrar bici:");
+		lblBorrarBici.setFont(new Font("Arial", Font.BOLD, 12));
+		lblBorrarBici.setBounds(343, 432, 106, 15);
+		alquilerBici.getContentPane().add(lblBorrarBici);
 		
 		
 		

@@ -74,13 +74,15 @@ public class AlquilerBici {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	
+
 	private void initialize() {
 	
 		
 		alquilerBici = new JFrame();
 		alquilerBici.setTitle("Alquilar Bici");
 		alquilerBici.getContentPane().setBackground(new Color(255, 235, 205));
-		alquilerBici.setBounds(100, 100, 665, 788);
+		alquilerBici.setBounds(100, 100, 929, 574);
 		alquilerBici.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		alquilerBici.getContentPane().setLayout(null);
 		
@@ -88,7 +90,7 @@ public class AlquilerBici {
 		lbltitulo.setForeground(new Color(153, 0, 51));
 		lbltitulo.setHorizontalAlignment(SwingConstants.CENTER);
 		lbltitulo.setFont(new Font("Broadway", Font.ITALIC, 40));
-		lbltitulo.setBounds(131, 0, 365, 46);
+		lbltitulo.setBounds(285, 0, 365, 46);
 		alquilerBici.getContentPane().add(lbltitulo);
 		
 		
@@ -130,7 +132,7 @@ public class AlquilerBici {
 	        		Pattern pat = Pattern.compile("^[A-Za-zÑñÁáÉéÍíÓóÚúÜü ]{1,50}$");
 					Matcher mat = pat.matcher(textFieldNombre.getText());
 					if (!mat.matches()) {
-						JOptionPane.showMessageDialog(null, "Formato no válido");
+						JOptionPane.showMessageDialog(null, "El nombre no tiene un formato correcto");
 					}
 	        	}
 	        	
@@ -139,40 +141,40 @@ public class AlquilerBici {
 		
 		JLabel lblAlquilarBici = new JLabel("ALQUILAR BICI");
 		lblAlquilarBici.setFont(new Font("Arial", Font.BOLD, 16));
-		lblAlquilarBici.setBounds(60, 547, 181, 14);
+		lblAlquilarBici.setBounds(704, 70, 181, 14);
 		alquilerBici.getContentPane().add(lblAlquilarBici);
 		
 		JLabel lblidBici = new JLabel("idBici");
 		lblidBici.setFont(new Font("Arial", Font.BOLD, 12));
-		lblidBici.setBounds(50, 586, 84, 14);
+		lblidBici.setBounds(694, 109, 84, 14);
 		alquilerBici.getContentPane().add(lblidBici);
 		
 		JLabel lbliduUsuarioAlquilar = new JLabel("idUsuario");
 		lbliduUsuarioAlquilar.setFont(new Font("Arial", Font.BOLD, 12));
-		lbliduUsuarioAlquilar.setBounds(50, 611, 88, 14);
+		lbliduUsuarioAlquilar.setBounds(694, 134, 88, 14);
 		alquilerBici.getContentPane().add(lbliduUsuarioAlquilar);
 		
 		JComboBox comboBoxidBiciAlquilar = new JComboBox();
-		comboBoxidBiciAlquilar.setBounds(141, 578, 86, 22);
+		comboBoxidBiciAlquilar.setBounds(785, 101, 86, 22);
 		alquilerBici.getContentPane().add(comboBoxidBiciAlquilar);
 		
 		JComboBox comboBoxidUsuarioAlquilar = new JComboBox();
-		comboBoxidUsuarioAlquilar.setBounds(141, 603, 86, 22);
+		comboBoxidUsuarioAlquilar.setBounds(785, 126, 86, 22);
 		alquilerBici.getContentPane().add(comboBoxidUsuarioAlquilar);
 		
 		
 		JLabel lblDevolverBici = new JLabel("DEVOLVER BICI");
 		lblDevolverBici.setFont(new Font("Arial", Font.BOLD, 16));
-		lblDevolverBici.setBounds(407, 549, 153, 14);
+		lblDevolverBici.setBounds(704, 251, 153, 14);
 		alquilerBici.getContentPane().add(lblDevolverBici);
 		
 		JLabel lblidUsuarioDevolver = new JLabel("idUsuario");
 		lblidUsuarioDevolver.setFont(new Font("Arial", Font.BOLD, 12));
-		lblidUsuarioDevolver.setBounds(379, 586, 88, 14);
+		lblidUsuarioDevolver.setBounds(694, 288, 88, 14);
 		alquilerBici.getContentPane().add(lblidUsuarioDevolver);
 		
 		JComboBox comboBoxidBiciDevolver = new JComboBox();
-		comboBoxidBiciDevolver.setBounds(483, 578, 86, 22);
+		comboBoxidBiciDevolver.setBounds(785, 280, 86, 22);
 		alquilerBici.getContentPane().add(comboBoxidBiciDevolver);
 		
 		JScrollPane scrollPaneUsuario = new JScrollPane(tableUsuario);
@@ -263,7 +265,10 @@ public class AlquilerBici {
 					    comboBoxborrarBici.removeAllItems();
 					    comboBoxidBiciAlquilar.removeAllItems();
 					    while (rs.next()) {
-					    
+					    	Object[] row = new Object[2];
+							row[0] = rs.getInt("idbici");
+							row[1] = rs.getString("disponibilidad");
+							modelBici.addRow(row);
 					       
 					     comboBoxborrarBici.addItem(rs.getInt("idbici"));
 					     comboBoxidBiciAlquilar.addItem(rs.getInt("idbici"));
@@ -277,7 +282,7 @@ public class AlquilerBici {
 					 JOptionPane.showMessageDialog(null, e3.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 
 				}catch(NullPointerException e2) {
-					JOptionPane.showMessageDialog(null, e2.getMessage(), "Hay entradas vacías", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, e2.getMessage(), "Formato del id no correcto", JOptionPane.ERROR_MESSAGE);
 				}
 				
 			}
@@ -383,7 +388,7 @@ public class AlquilerBici {
 		});
 		
 	
-		btnSalir.setBounds(506, 11, 89, 23);
+		btnSalir.setBounds(789, 22, 89, 23);
 		alquilerBici.getContentPane().add(btnSalir);
 		
 		textFieldCrearUsuario = new JTextField();
@@ -395,6 +400,10 @@ public class AlquilerBici {
 		btnCrearUsuario.setFont(new Font("Arial", Font.BOLD, 12));
 		btnCrearUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				String nombreUsuario =  textFieldNombre.getText();
+				if(nombreUsuario.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "La casilla nombre está vacía");
+				}else {
 				
 				try {
 
@@ -416,6 +425,8 @@ public class AlquilerBici {
 					ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
 					modelUsuario.setRowCount(0);
 					
+					comboBoxidUsuarioAlquilar.removeAllItems();
+					comboBoxborrarUsuario.removeAllItems();
 					while (rs.next()) {
 						Object[] row = new Object[3];
 						row[0] = rs.getInt("idusuario");
@@ -424,6 +435,8 @@ public class AlquilerBici {
 						
 
 						modelUsuario.addRow(row);
+						comboBoxidUsuarioAlquilar.addItem(rs.getInt("idusuario"));
+						comboBoxborrarUsuario.addItem(rs.getInt("idusuario"));
 					}
 						
 
@@ -432,10 +445,10 @@ public class AlquilerBici {
 				} catch (SQLException e) {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}catch (NumberFormatException e2) {
-					JOptionPane.showMessageDialog(null, "Hay casillas vacias", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "El formato del id no es válido", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 
-				
+				}
 			}
 		});
 		btnCrearUsuario.setBounds(74, 400, 153, 23);
@@ -447,20 +460,45 @@ public class AlquilerBici {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 				    Connection con = ConnectionSingleton.getConnection();
+				    int idUsuario = (int) comboBoxidUsuarioAlquilar.getSelectedItem();
+				    ResultSet rsUsuario = con.createStatement().executeQuery("SELECT bici_idbici FROM usuario WHERE idusuario = " + idUsuario);
+				   
+				    if(rsUsuario.next()) {
+				    	 int idBici = rsUsuario.getInt("bici_idbici");
+					        if (idBici != 0) {
+					            JOptionPane.showMessageDialog(null, "Este usuario ya tiene una bici alquilada", "Error", JOptionPane.ERROR_MESSAGE);
+					           
+					        }
+				    	
+				    }
+				    int idBiciAlquilar = (int) comboBoxidBiciAlquilar.getSelectedItem();
+				    ResultSet rsBici = con.createStatement().executeQuery("SELECT disponibilidad FROM bici WHERE idbici = " +idBiciAlquilar);
+				    if(rsBici.next()) {
+				    	 int disponibilidad = rsBici.getInt("disponibilidad");
+					        if (disponibilidad != 0) {
+					            JOptionPane.showMessageDialog(null, "Esta bici ya está alquilada", "Error", JOptionPane.ERROR_MESSAGE);
+					           
+					        }
+				    	
+				    }
+				    
+				    
 				    PreparedStatement upd_pstmt = con.prepareStatement("UPDATE bici SET disponibilidad = 1 WHERE idbici = ?");
-				    upd_pstmt.setInt(1, (int) comboBoxidBiciAlquilar.getSelectedItem());
+				    upd_pstmt.setInt(1, idBiciAlquilar);
 				    int rowsUpdated = upd_pstmt.executeUpdate();
 				    upd_pstmt.close();
 
 				    PreparedStatement upd_pstmt2 = con.prepareStatement("UPDATE usuario SET bici_idbici = ? WHERE idusuario = ?");
-				    upd_pstmt2.setInt(1, (int) comboBoxidBiciAlquilar.getSelectedItem());
-				    upd_pstmt2.setInt(2, (int) comboBoxidUsuarioAlquilar.getSelectedItem());
+				    upd_pstmt2.setInt(1,idBiciAlquilar);
+				    upd_pstmt2.setInt(2, idUsuario);
 				    int rowsUpdated2 = upd_pstmt2.executeUpdate();
 				    upd_pstmt2.close();
 
 				    PreparedStatement sel_pstmt = con.prepareStatement("SELECT idbici FROM bici WHERE disponibilidad = 0");
 				    ResultSet rowsSelected = sel_pstmt.executeQuery();
 				    sel_pstmt.close();
+				    
+		
 
 				    modelBici.setRowCount(0);
 				    comboBoxidBiciAlquilar.removeAllItems();
@@ -475,19 +513,40 @@ public class AlquilerBici {
 				        modelBici.addRow(row);
 				    }
 				    
+				    
+				    
 				    ResultSet rs = con.createStatement().executeQuery("SELECT * FROM usuario");
 				    modelUsuario.setRowCount(0);
 				    
+				    comboBoxidUsuarioAlquilar.removeAllItems();
+					comboBoxborrarUsuario.removeAllItems();
 				    while (rs.next()) {
 				        Object[] row = new Object[3];
 				        row[0] = rs.getInt("idusuario");
 				        row[1] = rs.getString("nombre");
 				        row[2] = rs.getInt("bici_idbici");
 				        modelUsuario.addRow(row);
-				       
-						
-				        
+				        comboBoxidUsuarioAlquilar.addItem(rs.getInt("idusuario"));
+						comboBoxborrarUsuario.addItem(rs.getInt("idusuario"));
 				    }
+				    
+				    ResultSet rs2 = con.createStatement().executeQuery("SELECT * FROM bici");
+				    modelBici.setRowCount(0);
+					comboBoxidBiciAlquilar.removeAllItems();
+					comboBoxborrarBici.removeAllItems();
+					
+					while (rs2.next()) {
+						Object[] row = new Object[2];
+						row[0] = rs2.getInt("idbici");
+						row[1] = rs2.getString("disponibilidad");
+						
+
+						modelBici.addRow(row);
+						comboBoxidBiciAlquilar.addItem(rs2.getInt("idbici"));
+						comboBoxborrarBici.addItem(rs2.getInt("idbici"));
+						
+
+					}
 
 				    JOptionPane.showMessageDialog(null, "Bici alquilada correctamente");
 
@@ -503,7 +562,7 @@ public class AlquilerBici {
 				
 			}
 		});
-		btnAlquilar.setBounds(60, 647, 160, 23);
+		btnAlquilar.setBounds(704, 170, 160, 23);
 		alquilerBici.getContentPane().add(btnAlquilar);
 		
 		JButton btnDevolver = new JButton("Devolver");
@@ -515,7 +574,7 @@ public class AlquilerBici {
 				
 			}
 		});
-		btnDevolver.setBounds(403, 647, 160, 23);
+		btnDevolver.setBounds(704, 349, 160, 23);
 		alquilerBici.getContentPane().add(btnDevolver);
 		
 		JLabel lblCrearBici = new JLabel("Crear Bici:");
@@ -543,13 +602,16 @@ public class AlquilerBici {
 					ResultSet rs = stmt.executeQuery("SELECT * FROM bici");
 					modelBici.setRowCount(0);
 					
+					comboBoxidBiciAlquilar.removeAllItems();
+					comboBoxborrarBici.removeAllItems();
+					
 					while (rs.next()) {
 						Object[] row = new Object[2];
 						row[0] = rs.getInt("idbici");
 						row[1] = rs.getString("disponibilidad");
-						
-						comboBoxidBiciAlquilar.addItem(rs.getInt("idbici"));
 						modelBici.addRow(row);
+						comboBoxidBiciAlquilar.addItem(rs.getInt("idbici"));
+						comboBoxborrarBici.addItem(rs.getInt("idbici"));
 					}
 					
 					textFieldcrearBici.setText("");
@@ -559,7 +621,7 @@ public class AlquilerBici {
 				} catch (SQLException e) {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				}catch (NumberFormatException e2) {
-					JOptionPane.showMessageDialog(null, "Hay casillas vacias", "Error", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Formato no válido", "Error", JOptionPane.ERROR_MESSAGE);
 				}
 
 				
@@ -589,7 +651,11 @@ public class AlquilerBici {
 					    comboBoxborrarUsuario.removeAllItems();
 					    comboBoxidUsuarioAlquilar.removeAllItems();
 					    while (rs.next()) {
-					   
+					    	Object[] row = new Object[3];
+							row[0] = rs.getInt("idusuario");
+							row[1] = rs.getString("nombre");
+							row[2] = rs.getInt("bici_idbici");
+							modelUsuario.addRow(row);
 					        comboBoxborrarUsuario.addItem(rs.getInt("idusuario"));
 					        comboBoxidUsuarioAlquilar.addItem(rs.getInt("idusuario"));
 					    }

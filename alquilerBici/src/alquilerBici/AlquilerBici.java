@@ -39,7 +39,11 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.border.LineBorder;
-
+/**
+ * Clase AlquilerBici utilizada para realizar un alquiler de una bici
+ * @author Mónica Alcañiz y José Ayalá
+ *@version 04-04-2023
+ */
 public class AlquilerBici {
 
 	private JFrame alquilerBici;

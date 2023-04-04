@@ -337,6 +337,23 @@ public class AlquilerBici {
 		btnborrarBici.setFont(new Font("Arial", Font.BOLD, 12));
 		btnborrarBici.setBounds(407, 472, 153, 23);
 		alquilerBici.getContentPane().add(btnborrarBici);
+		
+		comboBoxborrarBici.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					Connection con = ConnectionSingleton.getConnection();
+					Statement stmt4 = con.createStatement();
+					ResultSet rs4 = stmt4.executeQuery("SELECT idbici FROM bici WHERE disponibilidad = 0");
+					comboBoxborrarBici.removeAllItems();
+					while (rs4.next()) {
+						comboBoxborrarBici.addItem(rs4.getInt("idbici"));
+					}
+				}catch(SQLException e1) {
+					
+				}
+			}
+		});
 
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
@@ -446,7 +463,7 @@ public class AlquilerBici {
 						comboBoxborrarBici.addItem(rs3.getInt("idbici"));
 					}
 					
-					
+					JOptionPane.showMessageDialog(null, "Bici alquilada correctamente");
 					
 					
 				} catch (SQLIntegrityConstraintViolationException error) {
@@ -559,6 +576,7 @@ public class AlquilerBici {
 						comboBoxborrarBici.addItem(rs3.getInt("idbici"));
 					}
 					
+					JOptionPane.showMessageDialog(null, "Bici devuelta correctamente");
 
 				} catch (SQLException e) {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -589,6 +607,7 @@ public class AlquilerBici {
 					while (rs2.next()) {
 						comboBoxIdUsuarioDevolver.addItem(rs2.getInt("idusuario"));
 					}
+					
 				}catch(SQLException e1) {
 					
 				}
@@ -654,6 +673,24 @@ public class AlquilerBici {
 		});
 		btnBotonBorrarUsuario.setBounds(74, 498, 153, 23);
 		alquilerBici.getContentPane().add(btnBotonBorrarUsuario);
+		
+		comboBoxborrarUsuario.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					Connection con = ConnectionSingleton.getConnection();
+					Statement stmt2 = con.createStatement();
+					
+					ResultSet rs2 = stmt2.executeQuery("SELECT idusuario FROM usuario WHERE bici_idbici IS NULL");
+					comboBoxborrarUsuario.removeAllItems();
+					while (rs2.next()) {
+						comboBoxborrarUsuario.addItem(rs2.getInt("idusuario"));
+					}
+				}catch(SQLException e1) {
+					
+				}
+			}
+		});
 
 	}
 }

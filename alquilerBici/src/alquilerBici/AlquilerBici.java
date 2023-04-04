@@ -81,7 +81,7 @@ public class AlquilerBici {
 		alquilerBici = new JFrame();
 		alquilerBici.setTitle("Alquilar Bici");
 		alquilerBici.getContentPane().setBackground(new Color(255, 235, 205));
-		alquilerBici.setBounds(100, 100, 929, 574);
+		alquilerBici.setBounds(100, 100, 929, 471);
 		alquilerBici.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		alquilerBici.getContentPane().setLayout(null);
 
@@ -187,29 +187,6 @@ public class AlquilerBici {
 		textFieldcrearBici.setBounds(483, 341, 86, 20);
 		alquilerBici.getContentPane().add(textFieldcrearBici);
 
-		JLabel lblborrarUsuario = new JLabel("Borrar usuario:");
-		lblborrarUsuario.setFont(new Font("Arial", Font.BOLD, 12));
-		lblborrarUsuario.setBounds(10, 432, 106, 15);
-		alquilerBici.getContentPane().add(lblborrarUsuario);
-
-		JComboBox comboBoxborrarUsuario = new JComboBox();
-		comboBoxborrarUsuario.setBounds(141, 455, 86, 22);
-		alquilerBici.getContentPane().add(comboBoxborrarUsuario);
-
-		JLabel lblElegirBici = new JLabel("Elegir bici:");
-		lblElegirBici.setFont(new Font("Arial", Font.BOLD, 12));
-		lblElegirBici.setBounds(379, 445, 106, 15);
-		alquilerBici.getContentPane().add(lblElegirBici);
-
-		JComboBox comboBoxborrarBici = new JComboBox();
-		comboBoxborrarBici.setBounds(483, 441, 86, 22);
-		alquilerBici.getContentPane().add(comboBoxborrarBici);
-
-		JLabel lblElegirUsuario = new JLabel("Elegir Usuario");
-		lblElegirUsuario.setFont(new Font("Arial", Font.BOLD, 12));
-		lblElegirUsuario.setBounds(50, 463, 90, 14);
-		alquilerBici.getContentPane().add(lblElegirUsuario);
-
 		JLabel lblUsuario = new JLabel("USUARIO");
 		lblUsuario.setFont(new Font("Arial", Font.BOLD, 16));
 		lblUsuario.setBounds(110, 70, 81, 14);
@@ -220,11 +197,6 @@ public class AlquilerBici {
 		lblBici.setBounds(437, 70, 93, 14);
 		alquilerBici.getContentPane().add(lblBici);
 
-		JLabel lblBorrarBici = new JLabel("Borrar bici:");
-		lblBorrarBici.setFont(new Font("Arial", Font.BOLD, 12));
-		lblBorrarBici.setBounds(343, 418, 106, 15);
-		alquilerBici.getContentPane().add(lblBorrarBici);
-
 		DefaultTableModel modelUsuario = new DefaultTableModel();
 		modelUsuario.addColumn("Código");
 		modelUsuario.addColumn("Nombre");
@@ -234,7 +206,6 @@ public class AlquilerBici {
 		modelBici.addColumn("Código");
 		modelBici.addColumn("Estado");
 
-		
 		JButton btnMostrarBici = new JButton("Mostrar Bicis");
 		btnMostrarBici.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -246,7 +217,6 @@ public class AlquilerBici {
 					ResultSet rs = stmt.executeQuery("SELECT * FROM bici");
 
 					comboBoxidBiciAlquilar.removeAllItems();
-					comboBoxborrarBici.removeAllItems();
 
 					while (rs.next()) {
 						Object[] row = new Object[2];
@@ -255,7 +225,6 @@ public class AlquilerBici {
 
 						modelBici.addRow(row);
 						comboBoxidBiciAlquilar.addItem(rs.getInt("idbici"));
-						comboBoxborrarBici.addItem(rs.getInt("idbici"));
 
 					}
 
@@ -271,7 +240,6 @@ public class AlquilerBici {
 		btnMostrarBici.setBounds(407, 288, 153, 23);
 		alquilerBici.getContentPane().add(btnMostrarBici);
 
-		
 		JButton btnmostrarUsuario = new JButton("Mostrar Usuario");
 		btnmostrarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -283,7 +251,6 @@ public class AlquilerBici {
 					ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
 
 					comboBoxidUsuarioAlquilar.removeAllItems();
-					comboBoxborrarUsuario.removeAllItems();
 					comboBoxIdUsuarioDevolver.removeAllItems();
 
 					while (rs.next()) {
@@ -293,7 +260,6 @@ public class AlquilerBici {
 						row[2] = rs.getInt("bici_idbici");
 						modelUsuario.addRow(row);
 						comboBoxidUsuarioAlquilar.addItem(rs.getInt("idusuario"));
-						comboBoxborrarUsuario.addItem(rs.getInt("idusuario"));
 						comboBoxIdUsuarioDevolver.addItem(rs.getInt("idusuario"));
 					}
 					con.close();
@@ -310,50 +276,6 @@ public class AlquilerBici {
 		btnmostrarUsuario.setFont(new Font("Arial", Font.BOLD, 12));
 		btnmostrarUsuario.setBounds(74, 288, 153, 23);
 		alquilerBici.getContentPane().add(btnmostrarUsuario);
-		
-		
-		JButton btnborrarBici = new JButton("Borrar Bici");
-		btnborrarBici.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					Connection con = ConnectionSingleton.getConnection();
-					PreparedStatement dele_pstmt = con.prepareStatement("DELETE FROM bici WHERE idbici = ? ");
-					dele_pstmt.setInt(1, (int) comboBoxborrarBici.getSelectedItem());
-					int rowsDeleted = dele_pstmt.executeUpdate();
-					dele_pstmt.close();
-					btnMostrarBici.doClick();
-					JOptionPane.showMessageDialog(null, "Bici eliminada correctamente");
-
-				} catch (SQLException e3) {
-					JOptionPane.showMessageDialog(null, e3.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-
-				} catch (NullPointerException e2) {
-					JOptionPane.showMessageDialog(null, e2.getMessage(), "Formato del id no correcto",
-							JOptionPane.ERROR_MESSAGE);
-				}
-				
-			}
-		});
-		btnborrarBici.setFont(new Font("Arial", Font.BOLD, 12));
-		btnborrarBici.setBounds(407, 472, 153, 23);
-		alquilerBici.getContentPane().add(btnborrarBici);
-		
-		comboBoxborrarBici.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				try {
-					Connection con = ConnectionSingleton.getConnection();
-					Statement stmt4 = con.createStatement();
-					ResultSet rs4 = stmt4.executeQuery("SELECT idbici FROM bici WHERE disponibilidad = 0");
-					comboBoxborrarBici.removeAllItems();
-					while (rs4.next()) {
-						comboBoxborrarBici.addItem(rs4.getInt("idbici"));
-					}
-				}catch(SQLException e1) {
-					
-				}
-			}
-		});
 
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
@@ -382,7 +304,8 @@ public class AlquilerBici {
 					try {
 
 						Connection con = ConnectionSingleton.getConnection();
-						PreparedStatement ins_pstmt = con.prepareStatement("INSERT INTO usuario (nombre, idusuario)  VALUES (?,?)");
+						PreparedStatement ins_pstmt = con
+								.prepareStatement("INSERT INTO usuario (nombre, idusuario)  VALUES (?,?)");
 						ins_pstmt.setString(1, textFieldNombre.getText());
 						ins_pstmt.setInt(2, Integer.parseInt(textFieldCrearUsuario.getText()));
 						int rowsInserted = ins_pstmt.executeUpdate();
@@ -391,9 +314,11 @@ public class AlquilerBici {
 						JOptionPane.showMessageDialog(null, "Usuario creado correctamente");
 						textFieldNombre.setText("");
 						textFieldCrearUsuario.setText("");
-						
+
 					} catch (SQLIntegrityConstraintViolationException error) {
 						JOptionPane.showMessageDialog(null, "No pueden haber entradas duplicadas");
+						textFieldNombre.setText("");
+						textFieldCrearUsuario.setText("");
 					} catch (SQLException e) {
 						JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 					} catch (NumberFormatException e2) {
@@ -402,7 +327,7 @@ public class AlquilerBici {
 					}
 
 				}
-				
+
 			}
 		});
 		btnCrearUsuario.setBounds(74, 400, 153, 23);
@@ -414,26 +339,26 @@ public class AlquilerBici {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					Connection con = ConnectionSingleton.getConnection();
-					
-					PreparedStatement foreign = con.prepareStatement( "SET FOREIGN_KEY_CHECKS=0;");
+
+					PreparedStatement foreign = con.prepareStatement("SET FOREIGN_KEY_CHECKS=0;");
 					foreign.executeUpdate();
-					
-					PreparedStatement updtBici = con.prepareStatement("UPDATE bici SET disponibilidad = 1 WHERE idbici = ?;");
+
+					PreparedStatement updtBici = con
+							.prepareStatement("UPDATE bici SET disponibilidad = 1 WHERE idbici = ?;");
 					updtBici.setInt(1, (int) comboBoxidBiciAlquilar.getSelectedItem());
 					updtBici.executeUpdate();
 					updtBici.close();
-					
-					PreparedStatement updtUsuario = con.prepareStatement("UPDATE usuario SET bici_idbici = ? WHERE idusuario = ?");
+
+					PreparedStatement updtUsuario = con
+							.prepareStatement("UPDATE usuario SET bici_idbici = ? WHERE idusuario = ?");
 					updtUsuario.setInt(1, (int) comboBoxidBiciAlquilar.getSelectedItem());
 					updtUsuario.setInt(2, (int) comboBoxidUsuarioAlquilar.getSelectedItem());
 					updtUsuario.executeUpdate();
 					updtUsuario.close();
-					
-					
+
 					Statement stmt = con.createStatement();
 					ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
 					modelUsuario.setRowCount(0);
-					comboBoxborrarUsuario.removeAllItems();
 					comboBoxidBiciAlquilar.removeAllItems();
 					comboBoxidUsuarioAlquilar.removeAllItems();
 					while (rs.next()) {
@@ -442,30 +367,25 @@ public class AlquilerBici {
 						row[1] = rs.getString("nombre");
 						row[2] = rs.getInt("bici_idbici");
 						modelUsuario.addRow(row);
-						
-						comboBoxborrarUsuario.addItem(rs.getInt("idusuario"));
+
 					}
-					
-					
-					//Actualizacion de bicis
-					
+
+					// Actualizacion de bicis
+
 					modelBici.setRowCount(0);
 					Statement stmt3 = con.createStatement();
 					ResultSet rs3 = stmt3.executeQuery("SELECT * FROM bici");
-
-					comboBoxborrarBici.removeAllItems();
 
 					while (rs3.next()) {
 						Object[] row = new Object[2];
 						row[0] = rs3.getInt("idbici");
 						row[1] = rs3.getString("disponibilidad");
 						modelBici.addRow(row);
-						comboBoxborrarBici.addItem(rs3.getInt("idbici"));
+
 					}
-					
+
 					JOptionPane.showMessageDialog(null, "Bici alquilada correctamente");
-					
-					
+
 				} catch (SQLIntegrityConstraintViolationException error) {
 					JOptionPane.showMessageDialog(null, "No pueden haber entradas duplicadas");
 				} catch (SQLException e) {
@@ -475,17 +395,15 @@ public class AlquilerBici {
 				} catch (NullPointerException e3) {
 					JOptionPane.showMessageDialog(null, "Hay entradas vacías", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-//				btnMostrarBici.doClick();
-//				btnmostrarUsuario.doClick();
 			}
 		});
 		btnAlquilar.setBounds(704, 170, 160, 23);
 		alquilerBici.getContentPane().add(btnAlquilar);
-		
+
 		comboBoxidBiciAlquilar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				try {
 					Connection con = ConnectionSingleton.getConnection();
 					Statement stmt4 = con.createStatement();
@@ -494,28 +412,27 @@ public class AlquilerBici {
 					while (rs4.next()) {
 						comboBoxidBiciAlquilar.addItem(rs4.getInt("idbici"));
 					}
-				}catch(SQLException e1) {
-					
+				} catch (SQLException e1) {
+
 				}
 			}
 		});
-		
-		
+
 		comboBoxidUsuarioAlquilar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				try {
 					Connection con = ConnectionSingleton.getConnection();
 					Statement stmt2 = con.createStatement();
-					
+
 					ResultSet rs2 = stmt2.executeQuery("SELECT idusuario FROM usuario WHERE bici_idbici IS NULL");
 					comboBoxidUsuarioAlquilar.removeAllItems();
 					while (rs2.next()) {
 						comboBoxidUsuarioAlquilar.addItem(rs2.getInt("idusuario"));
 					}
-				}catch(SQLException e1) {
-					
+				} catch (SQLException e1) {
+
 				}
 			}
 		});
@@ -526,56 +443,52 @@ public class AlquilerBici {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					Connection con = ConnectionSingleton.getConnection();
-					
-					
-					PreparedStatement foreign = con.prepareStatement( "SET FOREIGN_KEY_CHECKS=0;");
+
+					PreparedStatement foreign = con.prepareStatement("SET FOREIGN_KEY_CHECKS=0;");
 					foreign.executeUpdate();
-					
-					PreparedStatement dele_pstmt2 = con.prepareStatement("UPDATE bici SET disponibilidad = 0 WHERE idbici = (SELECT bici_idbici FROM usuario WHERE idusuario = ?);");
+
+					PreparedStatement dele_pstmt2 = con.prepareStatement(
+							"UPDATE bici SET disponibilidad = 0 WHERE idbici = (SELECT bici_idbici FROM usuario WHERE idusuario = ?);");
 					dele_pstmt2.setInt(1, (int) comboBoxIdUsuarioDevolver.getSelectedItem());
-					
+
 					dele_pstmt2.executeUpdate();
 					dele_pstmt2.close();
-					
-					PreparedStatement dele_pstmt = con.prepareStatement("UPDATE usuario SET bici_idbici = NULL WHERE idusuario = ?");
+
+					PreparedStatement dele_pstmt = con
+							.prepareStatement("UPDATE usuario SET bici_idbici = NULL WHERE idusuario = ?");
 					dele_pstmt.setInt(1, (int) comboBoxIdUsuarioDevolver.getSelectedItem());
 					dele_pstmt.executeUpdate();
 					dele_pstmt.close();
-					
+
 					Statement stmt = con.createStatement();
 					ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
 					modelUsuario.setRowCount(0);
-					comboBoxborrarUsuario.removeAllItems();
-					
-					
+
 					while (rs.next()) {
 						Object[] row = new Object[3];
 						row[0] = rs.getInt("idusuario");
 						row[1] = rs.getString("nombre");
 						row[2] = rs.getInt("bici_idbici");
 						modelUsuario.addRow(row);
-						comboBoxborrarUsuario.addItem(rs.getInt("idusuario"));
+
 					}
-					
-					
-					//Actualizacion de bicis
-					
+
+					// Actualizacion de bicis
+
 					modelBici.setRowCount(0);
 					Statement stmt3 = con.createStatement();
 					ResultSet rs3 = stmt3.executeQuery("SELECT * FROM bici");
 
-					comboBoxborrarBici.removeAllItems();
 					comboBoxIdUsuarioDevolver.removeAllItems();
-					
 
 					while (rs3.next()) {
 						Object[] row = new Object[2];
 						row[0] = rs3.getInt("idbici");
 						row[1] = rs3.getString("disponibilidad");
 						modelBici.addRow(row);
-						comboBoxborrarBici.addItem(rs3.getInt("idbici"));
+
 					}
-					
+
 					JOptionPane.showMessageDialog(null, "Bici devuelta correctamente");
 
 				} catch (SQLException e) {
@@ -585,31 +498,31 @@ public class AlquilerBici {
 				} catch (NullPointerException e3) {
 					JOptionPane.showMessageDialog(null, "Hay entradas vacías", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-				
-				//btnMostrarBici.doClick();
+
+				// btnMostrarBici.doClick();
 //				btnmostrarUsuario.doClick();
 
 			}
 		});
 		btnDevolver.setBounds(711, 322, 160, 23);
 		alquilerBici.getContentPane().add(btnDevolver);
-		
+
 		comboBoxIdUsuarioDevolver.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 				try {
 					Connection con = ConnectionSingleton.getConnection();
 					Statement stmt2 = con.createStatement();
-					
+
 					ResultSet rs2 = stmt2.executeQuery("SELECT idusuario FROM usuario WHERE bici_idbici != 0");
 					comboBoxIdUsuarioDevolver.removeAllItems();
 					while (rs2.next()) {
 						comboBoxIdUsuarioDevolver.addItem(rs2.getInt("idusuario"));
 					}
-					
-				}catch(SQLException e1) {
-					
+
+				} catch (SQLException e1) {
+
 				}
 			}
 		});
@@ -635,7 +548,9 @@ public class AlquilerBici {
 					textFieldcrearBici.setText("");
 
 				} catch (SQLIntegrityConstraintViolationException error) {
+					textFieldcrearBici.setText("");
 					JOptionPane.showMessageDialog(null, "No pueden haber entradas duplicadas");
+
 				} catch (SQLException e) {
 					JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
 				} catch (NumberFormatException e2) {
@@ -644,53 +559,8 @@ public class AlquilerBici {
 				btnMostrarBici.doClick();
 			}
 		});
-		btnCrearBici.setBounds(407, 368, 153, 23);
+		btnCrearBici.setBounds(407, 400, 153, 23);
 		alquilerBici.getContentPane().add(btnCrearBici);
-
-		JButton btnBotonBorrarUsuario = new JButton("Borrar Usuario");
-		btnBotonBorrarUsuario.setFont(new Font("Arial", Font.BOLD, 12));
-		btnBotonBorrarUsuario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				try {
-					Connection con = ConnectionSingleton.getConnection();
-					PreparedStatement dele_pstmt = con.prepareStatement("DELETE FROM usuario WHERE idusuario = ? ");
-					dele_pstmt.setInt(1, (int) comboBoxborrarUsuario.getSelectedItem());
-
-					int rowsDeleted = dele_pstmt.executeUpdate();
-					dele_pstmt.close();
-					JOptionPane.showMessageDialog(null, "Usuario eliminado correctamente");
-
-				} catch (SQLException e3) {
-					JOptionPane.showMessageDialog(null, e3.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-
-				} catch (NullPointerException e2) {
-					JOptionPane.showMessageDialog(null, e2.getMessage(), "Hay entradas vacías",
-							JOptionPane.ERROR_MESSAGE);
-				}
-				btnmostrarUsuario.doClick();
-			}
-		});
-		btnBotonBorrarUsuario.setBounds(74, 498, 153, 23);
-		alquilerBici.getContentPane().add(btnBotonBorrarUsuario);
-		
-		comboBoxborrarUsuario.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				try {
-					Connection con = ConnectionSingleton.getConnection();
-					Statement stmt2 = con.createStatement();
-					
-					ResultSet rs2 = stmt2.executeQuery("SELECT idusuario FROM usuario WHERE bici_idbici IS NULL");
-					comboBoxborrarUsuario.removeAllItems();
-					while (rs2.next()) {
-						comboBoxborrarUsuario.addItem(rs2.getInt("idusuario"));
-					}
-				}catch(SQLException e1) {
-					
-				}
-			}
-		});
 
 	}
 }

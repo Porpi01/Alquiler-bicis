@@ -490,7 +490,7 @@ public class AlquilerBici {
 					Connection con = ConnectionSingleton.getConnection();
 					Statement stmt2 = con.createStatement();
 					
-					ResultSet rs2 = stmt2.executeQuery("SELECT idusuario FROM usuario WHERE bici_idbici = 0");
+					ResultSet rs2 = stmt2.executeQuery("SELECT idusuario FROM usuario WHERE bici_idbici IS NULL");
 					comboBoxidUsuarioAlquilar.removeAllItems();
 					while (rs2.next()) {
 						comboBoxidUsuarioAlquilar.addItem(rs2.getInt("idusuario"));

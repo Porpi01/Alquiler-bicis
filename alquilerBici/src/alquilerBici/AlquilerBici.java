@@ -417,7 +417,8 @@ public class AlquilerBici {
 					ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
 					modelUsuario.setRowCount(0);
 					comboBoxborrarUsuario.removeAllItems();
-					
+					comboBoxidBiciAlquilar.removeAllItems();
+					comboBoxidUsuarioAlquilar.removeAllItems();
 					while (rs.next()) {
 						Object[] row = new Object[3];
 						row[0] = rs.getInt("idusuario");
@@ -444,6 +445,7 @@ public class AlquilerBici {
 						modelBici.addRow(row);
 						comboBoxborrarBici.addItem(rs3.getInt("idbici"));
 					}
+					
 					
 					
 					
@@ -518,7 +520,7 @@ public class AlquilerBici {
 					dele_pstmt2.executeUpdate();
 					dele_pstmt2.close();
 					
-					PreparedStatement dele_pstmt = con.prepareStatement("UPDATE usuario SET bici_idbici = 0 WHERE idusuario = ?");
+					PreparedStatement dele_pstmt = con.prepareStatement("UPDATE usuario SET bici_idbici = NULL WHERE idusuario = ?");
 					dele_pstmt.setInt(1, (int) comboBoxIdUsuarioDevolver.getSelectedItem());
 					dele_pstmt.executeUpdate();
 					dele_pstmt.close();
@@ -546,6 +548,8 @@ public class AlquilerBici {
 					ResultSet rs3 = stmt3.executeQuery("SELECT * FROM bici");
 
 					comboBoxborrarBici.removeAllItems();
+					comboBoxIdUsuarioDevolver.removeAllItems();
+					
 
 					while (rs3.next()) {
 						Object[] row = new Object[2];

@@ -284,7 +284,6 @@ public class AlquilerBici {
 						comboBoxidUsuarioAlquilar.addItem(rs.getInt("idusuario"));
 						comboBoxIdUsuarioDevolver.addItem(rs.getInt("idusuario"));
 					}
-					con.close();
 
 					tableUsuario.setModel(modelUsuario);
 					tableUsuario.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
@@ -307,6 +306,13 @@ public class AlquilerBici {
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				try {
+					Connection con = ConnectionSingleton.getConnection();
+					con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 				alquilerBici.dispose();
 			}
 		});
@@ -499,18 +505,18 @@ public class AlquilerBici {
 					PreparedStatement foreign = con.prepareStatement("SET FOREIGN_KEY_CHECKS=0;");
 					foreign.executeUpdate();
 
-					PreparedStatement dele_pstmt2 = con.prepareStatement(
+					PreparedStatement updtBici = con.prepareStatement(
 							"UPDATE bici SET disponibilidad = 0 WHERE idbici = (SELECT bici_idbici FROM usuario WHERE idusuario = ?);");
-					dele_pstmt2.setInt(1, (int) comboBoxIdUsuarioDevolver.getSelectedItem());
+					updtBici.setInt(1, (int) comboBoxIdUsuarioDevolver.getSelectedItem());
 
-					dele_pstmt2.executeUpdate();
-					dele_pstmt2.close();
+					updtBici.executeUpdate();
+					updtBici.close();
 
-					PreparedStatement dele_pstmt = con
+					PreparedStatement updtUsuario = con
 							.prepareStatement("UPDATE usuario SET bici_idbici = NULL WHERE idusuario = ?");
-					dele_pstmt.setInt(1, (int) comboBoxIdUsuarioDevolver.getSelectedItem());
-					dele_pstmt.executeUpdate();
-					dele_pstmt.close();
+					updtUsuario.setInt(1, (int) comboBoxIdUsuarioDevolver.getSelectedItem());
+					updtUsuario.executeUpdate();
+					updtUsuario.close();
 
 					Statement stmt = con.createStatement();
 					ResultSet rs = stmt.executeQuery("SELECT * FROM usuario");
@@ -550,9 +556,6 @@ public class AlquilerBici {
 				} catch (NullPointerException e3) {
 					JOptionPane.showMessageDialog(null, "Hay entradas vacías", "Error", JOptionPane.ERROR_MESSAGE);
 				}
-
-				// btnMostrarBici.doClick();
-//				btnmostrarUsuario.doClick();
 
 			}
 		});
@@ -602,11 +605,11 @@ public class AlquilerBici {
 				try {
 
 					Connection con = ConnectionSingleton.getConnection();
-					PreparedStatement ins_pstmt = con
+					PreparedStatement insBici = con
 							.prepareStatement("INSERT INTO bici (idbici, disponibilidad)  VALUES (?,0)");
-					ins_pstmt.setInt(1, Integer.parseInt(textFieldcrearBici.getText()));
-					int rowsInserted = ins_pstmt.executeUpdate();
-					ins_pstmt.close();
+					insBici.setInt(1, Integer.parseInt(textFieldcrearBici.getText()));
+					int rowsInserted = insBici.executeUpdate();
+					insBici.close();
 					JOptionPane.showMessageDialog(null, "Bici creada correctamente");
 					textFieldcrearBici.setText("");
 

@@ -124,6 +124,10 @@ public class AlquilerBici {
 		alquilerBici.getContentPane().add(textFieldNombre);
 		textFieldNombre.setColumns(10);
 
+		/*
+		 * Comprobación para ver si el nombre tiene el formato adecuado,
+		 * se comprueba mediante una expresión regular
+		 * */
 		textFieldNombre.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent e) {
@@ -210,6 +214,13 @@ public class AlquilerBici {
 		modelBici.addColumn("Código");
 		modelBici.addColumn("Estado");
 
+		
+
+		/*
+		 * Botón mostrar bicis, lo que hace es activar la tabla para que
+		 * aparezcan todos los campos de la tabla mediante JDBC y una sentencia
+		 * SQL
+		 * */
 		JButton btnMostrarBici = new JButton("Mostrar Bicis");
 		btnMostrarBici.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -245,6 +256,12 @@ public class AlquilerBici {
 		alquilerBici.getContentPane().add(btnMostrarBici);
 		btnMostrarBici.doClick();
 
+		
+		/*
+		 * Botón mostrar usuario, lo que hace es activar la tabla para que
+		 * aparezcan todos los campos de la tabla mediante JDBC y una sentencia
+		 * SQL
+		 * */
 		JButton btnmostrarUsuario = new JButton("Mostrar Usuario");
 		btnmostrarUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -283,6 +300,10 @@ public class AlquilerBici {
 		alquilerBici.getContentPane().add(btnmostrarUsuario);
 		btnmostrarUsuario.doClick();
 
+		
+		/*
+		 * Botón salir, lo que hace es cerrar el programa.
+		 * */
 		JButton btnSalir = new JButton("Salir");
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -298,6 +319,12 @@ public class AlquilerBici {
 		textFieldCrearUsuario.setBounds(141, 366, 86, 20);
 		alquilerBici.getContentPane().add(textFieldCrearUsuario);
 
+		
+		/*
+		 * Botón crear usuario, primero visualiza el textField correspondiente,
+		 * si está vacío salta un mensaje de error. Si el nombre es correcto se
+		 * hacen una serie de inserts para que se cree el usuario.
+		 * */
 		JButton btnCrearUsuario = new JButton("Crear Usuario");
 		btnCrearUsuario.setFont(new Font("Arial", Font.BOLD, 12));
 		btnCrearUsuario.addActionListener(new ActionListener() {
@@ -339,6 +366,10 @@ public class AlquilerBici {
 		btnCrearUsuario.setBounds(74, 400, 153, 23);
 		alquilerBici.getContentPane().add(btnCrearUsuario);
 
+		/*
+		 * Botón de alquilar bici, hace updates del usuario y de la bici para que tengan una bici alquilada.
+		 * Después se actualiza la tabla para que el usuario y bici estén ocupadas.
+		 * */
 		JButton btnAlquilar = new JButton("Alquilar");
 		btnAlquilar.setFont(new Font("Arial", Font.BOLD, 12));
 		btnAlquilar.addActionListener(new ActionListener() {
@@ -406,6 +437,10 @@ public class AlquilerBici {
 		btnAlquilar.setBounds(704, 170, 160, 23);
 		alquilerBici.getContentPane().add(btnAlquilar);
 
+		/*
+		 * Evento al pulsar el comboBox de alquilar bici, lo que hace es una consulta SQL
+		 * seleccionando solo las bicis libres.
+		 * */
 		comboBoxidBiciAlquilar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -424,6 +459,10 @@ public class AlquilerBici {
 			}
 		});
 
+		/*
+		 * Evento al pulsar el comboBox de alquilar Usuario, lo que hace es una consulta SQL
+		 * seleccionando solo los usuarios que no tienen una bici alquilada.
+		 * */
 		comboBoxidUsuarioAlquilar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -443,6 +482,13 @@ public class AlquilerBici {
 			}
 		});
 
+		
+		/*
+		 * Botón devolver bici, hace una serie de sentencias SQL que actualiza la tabla
+		 * y cambia para que la bici alquilada cambie de estado a libre y para que el usuario
+		 * que tenia dicha bici alquilada no tenga ninguna.
+		 * 
+		 * */
 		JButton btnDevolver = new JButton("Devolver");
 		btnDevolver.setFont(new Font("Arial", Font.BOLD, 12));
 		btnDevolver.addActionListener(new ActionListener() {
@@ -513,6 +559,11 @@ public class AlquilerBici {
 		btnDevolver.setBounds(711, 322, 160, 23);
 		alquilerBici.getContentPane().add(btnDevolver);
 
+		
+		/*
+		 * Evento al pulsar el comboBox de devolver bici, hace una consulta sql
+		 * de, solamente, los usuarios que tienen una bici alquilada para que la puedan devolver.
+		 * */
 		comboBoxIdUsuarioDevolver.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -538,6 +589,12 @@ public class AlquilerBici {
 		lblCrearBici.setBounds(343, 322, 153, 14);
 		alquilerBici.getContentPane().add(lblCrearBici);
 
+		
+		/*
+		 * Botón crear bici, coge el id que ha escrito un usuario el
+		 * el text field correspondiente. Controla los errores que pueden surgir,
+		 * si todo está correcto crea la bici y actualiza la tabla de la bici..
+		 * */
 		JButton btnCrearBici = new JButton("Crear Bici");
 		btnCrearBici.setFont(new Font("Arial", Font.BOLD, 12));
 		btnCrearBici.addActionListener(new ActionListener() {
